@@ -1,33 +1,23 @@
 import Image from 'next/image'
 import styles from './page.module.css'
+import { initializeApp } from "firebase/app";
 
 export default function Home() {
+
+  const firebaseConfig = {
+    apiKey: process.env.NEXT_FIREBASE_APIKEY,
+    authDomain: process.env.NEXT_FIREBASE_AUTHDOMAIN,
+    projectId: process.env.NEXT_FIREBASE_PROJECTID,
+    storageBucket: process.env.NEXT_FIREBASE_STORAGEBUCKET,
+    messagingSenderId: process.env.NEXT_FIREBASE_MESSANGERID,
+    appId: process.env.NEXT_FIREBASE_APPID,
+    measurementId: process.env.NEXT_FIREBASE_MEASUREMENTID
+  };
+
+  const app = initializeApp(firebaseConfig);
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
       <div className={styles.center}>
         <Image
           className={styles.logo}

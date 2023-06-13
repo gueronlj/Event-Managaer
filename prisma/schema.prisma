@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+  relationMode      = "foreignKeys"
+}
+
+model User {
+  id     Int     @id @default(autoincrement())
+  email  String  @unique
+  name   String?
+  phone  String?
+  events Event[]
+}
+
+model Event {
+  id          Int      @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  title       String   @db.VarChar(255)
+  description String?  @db.VarChar(255)
+  organizerId Int
+  max_ticekts Int
+  start       DateTime
+  end         DateTime
+  organizer   User     @relation(fields: [organizerId], references: [id])
+}
