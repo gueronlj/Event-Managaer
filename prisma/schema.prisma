@@ -24,8 +24,8 @@ model Event {
   title       String   @db.VarChar(255)
   description String?  @db.VarChar(255)
   organizerId Int
-  max_ticekts Int
+  max_tickets Int
   start       DateTime
   end         DateTime
-  organizer   User     @relation(fields: [organizerId], references: [id])
+  attendies   User[]
 }
