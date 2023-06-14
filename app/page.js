@@ -1,21 +1,8 @@
 import Image from 'next/image'
 import styles from './page.module.css'
-import { initializeApp } from "firebase/app";
 
 export default function Home() {
-
-  const firebaseConfig = {
-    apiKey: process.env.NEXT_FIREBASE_APIKEY,
-    authDomain: process.env.NEXT_FIREBASE_AUTHDOMAIN,
-    projectId: process.env.NEXT_FIREBASE_PROJECTID,
-    storageBucket: process.env.NEXT_FIREBASE_STORAGEBUCKET,
-    messagingSenderId: process.env.NEXT_FIREBASE_MESSANGERID,
-    appId: process.env.NEXT_FIREBASE_APPID,
-    measurementId: process.env.NEXT_FIREBASE_MEASUREMENTID
-  };
-
-  const app = initializeApp(firebaseConfig);
-
+   
   return (
     <main className={styles.main}>
       <div className={styles.center}>
