@@ -2,6 +2,9 @@ import Login from '../components/login/login.js'
 import { initializeApp } from 'firebase/app';
 import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import {useState, useEffect} from 'react'
+import Layout from '../components/layout.js'
+import Dashboard from '../components/dashboard/dashboard.js'
+import './globals.css'
 
 const MyApp = () => {
 
@@ -16,11 +19,6 @@ const MyApp = () => {
    };
    const app = initializeApp(firebaseConfig);
    const [user, setUser] = useState(null)
-
-   const logout = () => {
-      const auth = getAuth();
-      signOut(auth)
-   }
 
    useEffect(() => {
       //Attatch Firebase authentication Observer
@@ -41,10 +39,9 @@ const MyApp = () => {
       )
    } else {
       return(
-         <div>
-            <button onClick={logout}>Sign out</button>
-            <h1>Dashboard here</h1>
-         </div>
+         <Layout>
+            <Dashboard/>
+         </Layout>
       )
    }
 }

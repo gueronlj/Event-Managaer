@@ -1,0 +1,18 @@
+.SideMenu {
+   border-right: 1px solid black;
+   padding-top: 20px;
+   padding-right: 20px;
+   font-size: 14px;
+   height: 100vh;
+}
+
+.SideMenu ul {
+   list-style: none;
+   padding-left: 0px;
+   margin: 0px;
+}
+
+.SideMenu li {
+   margin-bottom: 1em;
+
+}
