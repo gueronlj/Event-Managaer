@@ -1,11 +1,25 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from 'react'
+import checkPassword from './checkPassword';
 
-const Signup = () => {
-  const [credentials, setCredentials] = useState({email:'gueronlj4@gmail.com', password:'123456'})
- 
-  const handleSignUp = () => {
+const addUsertoDB = async ( email )=> {
+  try {
+    const body = { 
+      email: email,
+      name: 'Joe Shmoe',
+      phone:'',
+    }
+    await fetch(`/api/users/newUser`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })  
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+const handleSignUp = async ( {email, password, confirmPassword} ) => {
 
     const firebaseConfig = {
       apiKey: process.env.NEXT_PUBLIC_APIKEY,
@@ -19,28 +33,19 @@ const Signup = () => {
     
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    createUserWithEmailAndPassword(auth, credentials.email, credentials.password)
+
+    if (checkPassword(password, confirmPassword)){
+      createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-        //TODO: Add new user to prisma database
+        console.log(user);
+        addUsertoDB(email)
        })
       .catch((error) => {
-        console.log(error.message)
-        if ( error.message === "Firebase: Error (auth/email-already-in-use)." ){
-          console.log('Email already in use')
-        } else {
-          console.log("something wrong")
-        }
+        console.log(error.message);
       });
-  }
-
-  return(
-    <div>
-      <button onClick={handleSignUp}>Create Account</button>
-    </div>
-  )
-
+    }
 }
 
-export default Signup;
+export default handleSignUp;

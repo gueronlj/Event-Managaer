@@ -1,0 +1,56 @@
+.LoginForm {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: auto;
+   margin-top: 10vh;
+   margin-bottom: auto;
+   font-family: helvetica;
+   max-width: 500px;
+   height: fit-content;
+}
+
+.LoginForm > * {
+   margin-top: 1em;
+   margin-bottom: 1em;
+}
+
+.signupCTA {
+   display: flex;
+   flex-direction: column;
+}
+
+.signupCTA > *{
+   margin: 5px;
+}
+
+.error{
+   color: red;
+}
+
+.MuiInput-root {
+   color: #f6d240;;
+   border-bottom: 1px solid #f6d240;
+   margin: 0px;
+}
+
+.MuiFormCOntrol-root{
+   margin-bottom: 1em;
+}
+
+@media (prefers-color-scheme: dark) {
+   .LoginForm{
+     color-scheme: dark;
+     color:  rgb(19, 90, 255);
+   }
+
+   .MuiInput-root {
+      color: rgb(19, 90, 255);;;
+      border-bottom: 1px solid rgb(19, 90, 255);;
+      margin: 0px;
+   }
+
+   .MuiButton-root {
+      color:rgb(19, 90, 255);
+   }
+ }

@@ -1,6 +1,6 @@
 import Login from '../components/login/login.js'
 import { initializeApp } from 'firebase/app';
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {useState, useEffect} from 'react'
 import Layout from '../components/layout.js'
 import Dashboard from '../components/dashboard/dashboard.js'

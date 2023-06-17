@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react';
 import styles from './dashboard.module.css'
 import SideMenu from '../sidemenu/SideMenu.js'
 

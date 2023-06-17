@@ -1,5 +1,5 @@
 import {useState, useEffect } from 'react';
-import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import styles from './header.module.css'
 
 const LogoutBtn = () => {

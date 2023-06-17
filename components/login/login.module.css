@@ -2,9 +2,10 @@
    display: flex;
    flex-direction: column;
    align-items: center;
-   margin-top: 25vh;
+   margin-top: 15vh;
    margin-bottom: auto;
    font-family: helvetica;
+   color:rgb(0, 53, 227)
 }
 
 .LoginForm > * {
@@ -23,4 +24,8 @@
 
 .error{
    color: red;
+}
+
+.signupCTA {
+   align-items: center;
 }

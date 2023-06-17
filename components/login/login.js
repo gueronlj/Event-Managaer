@@ -3,28 +3,16 @@ import { useState } from 'react'
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import FormControl from "@mui/material/FormControl";
-import InputAdornment from '@mui/material/InputAdornment';
 import Button from '@mui/material/Button';
 import InputLabel from "@mui/material/InputLabel";
 import CheckFormControl from '../helpers/CheckFormControl.js'
 import styles from './login.module.css'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { initializeApp } from 'firebase/app';
 import translateError from '../helpers/TranslateError.js'
+import Link from 'next/link'
 
 const Login = () => {
-   const firebaseConfig = {
-     apiKey: process.env.NEXT_PUBLIC_APIKEY,
-     authDomain: process.env.NEXT_PUBLIC_AUTHDOMAIN,
-     projectId: process.env.NEXT_PUBLIC_PROJECTID,
-     storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
-     messagingSenderId: process.env.NEXT_PUBLIC_MESSENGERID,
-     appId: process.env.NEXT_PUBLIC_APPID,
-     measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID
-   };
-
-   const app = initializeApp(firebaseConfig);
-
+   
    const { register, handleSubmit, formState: { errors }, watch } = useForm( {mode: "onChange"})
    const [credentials, setCredentials] = useState({email:'', password:''})
    const [credentialsError, setCredentialsError] = useState('')
@@ -60,7 +48,8 @@ const Login = () => {
    return (
       <div className={styles.LoginForm}>
 
-         <h2>Event Manager</h2>
+         <h1>Event Manager</h1>
+         <h3>Sign In</h3>
          <Box
             component="form"
             sx={{ display:'flex', flexDirection:'column',
@@ -111,7 +100,7 @@ const Login = () => {
 
          <div className = {styles.signupCTA}>
             <p>Dont have an account?</p>
-            <Button>Register</Button>
+            <Link href="/signup"><Button>Register</Button></Link>
          </div>
       </div>
    )
