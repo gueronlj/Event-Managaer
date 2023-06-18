@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import checkPassword from './checkPassword';
+import useRouter from 'next/navigation';
+import Router from 'next/router';
 
 const addUsertoDB = async ( email )=> {
   try {
@@ -40,8 +42,20 @@ const handleSignUp = async ( {email, password, confirmPassword} ) => {
         // Signed in 
         const user = userCredential.user;
         console.log(user);
-        addUsertoDB(email)
-       })
+        addUsertoDB(email);
+      })
+      .then(() => {
+        signInWithEmailAndPassword(auth, email, password)
+          .then((user) => {
+            //success
+            console.log('logged in!');
+            // const router = useRouter()
+            Router.push('/')
+          })
+          .catch((error) => {
+            console.log(error.message);
+          })
+      })      
       .catch((error) => {
         console.log(error.message);
       });
