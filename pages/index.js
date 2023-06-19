@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {useState, useEffect} from 'react'
+import { useEffect} from 'react'
 import { useRouter } from 'next/router'
-   
+
 const MyApp = ({Component, pagePROPS}) => {
 
    const firebaseConfig = {
@@ -15,19 +15,17 @@ const MyApp = ({Component, pagePROPS}) => {
      measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID
    };
    const app = initializeApp(firebaseConfig);
-   const [user, setUser] = useState(null)
    const router = useRouter();
 
    useEffect(() => {
       //Attatch Firebase authentication Observer
       const auth = getAuth()
-      const user = auth.currentUser      
+      const user = auth.currentUser
          if (user) {
-            router.push('/dashboard')
-            
+            router.push('/dashboard')  
          } else {
             router.push('/login');
-         }             
+         }
    },[])
 }
 

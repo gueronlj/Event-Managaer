@@ -1,6 +1,6 @@
 import {useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import styles from './header.module.css'
 import Router from 'next/router';
 
@@ -28,13 +28,21 @@ const LogoutBtn = () => {
 }
 
 const Header = () => {
-   const [user, setUser] = useState(null)
+   const [currentUser, setCurrentUser] = useState(null)
 
    const getUserInfo = async () => {
       try{
          const auth = getAuth(app)
          const user = auth.currentUser
-         setUser(user)
+         onAuthStateChanged(auth, (user) => {
+           if (user) {
+             // User logged in
+             setCurrentUser(user);
+             console.log(user);
+           } else {
+             setCurrentUser(null)
+           }
+         })
       } catch (error) {
          console.log(error);
       }
@@ -42,6 +50,7 @@ const Header = () => {
 
    useEffect(() => {
      getUserInfo()
+
    },[]);
 
    return (
@@ -49,9 +58,11 @@ const Header = () => {
          <div className = {styles.logo}>
             <p>Event Manager</p>
          </div>
-         { user && <p>{user.email}</p>}
-         <button>Profile</button>
-         <LogoutBtn/>
+         { currentUser && <>
+            <p>{currentUser.email}</p>
+            <button>Profile</button>
+            <LogoutBtn/>
+         </>}
       </div>)
 }
 

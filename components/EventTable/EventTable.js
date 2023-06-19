@@ -28,7 +28,7 @@ const EventTable = ({user}) => {
       fetchData()
    },[])
 
-   return (  
+   return (
       <>
          {loading && <p>Loading...</p>}
          {error && <h2>{error?.code}</h2>}
@@ -42,18 +42,18 @@ const EventTable = ({user}) => {
 
                         <h4>Who's going</h4>
                         <ul>
-                           {event.User.map((user) => {
+                           {event.attendies.map((user) => {
                               return(
                                  <li key={user.id}>{user.email}</li>
                               )
                            })}
-                        </ul>                       
+                        </ul>
                      </div>
                   )
                })}
             </div>
-         }       
-      </>     
+         }
+      </>
    )
 }
 
