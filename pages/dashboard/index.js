@@ -1,41 +1,35 @@
 import Layout from "@/components/layout";
 import styles from './dashboard.module.css'
-import SideMenu from "@/components/sidemenu/SideMenu";
-import Router from "next/router";
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import EventTable from "@/components/EventTable/EventTable";
+import getUserId from "@/components/helpers/getUserId";
 
 const Dashboard = () => {
-   const [currentUser, setCurrentUser] = useState(null)
+   const [currentUser, setCurrentUser] = useState({email:''});
+   const [userId, setUserId] = useState('')
 
    useEffect(() => {
-   //Attatch Firebase authentication Observer
+      //Attatch Firebase authentication Observer
       const auth = getAuth()
-      const user = auth.currentUser
       onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User logged in
-          setCurrentUser(user);
-          console.log(user);
-        } else {
-          setCurrentUser(null)
-        }
+         if (user) {
+            console.log(user.email)
+            setCurrentUser(user);
+            setUserId( getUserId(user.email) );
+         } else {  setCurrentUser(null) }
       })
    },[])
 
    return (
       <Layout>
-         <div className = {styles.main}>
-            <SideMenu/>
-
+         {currentUser &&
             <div className = {styles.dashboard}>
-               <h1>My Events</h1>
+               <h1>My Event </h1>
 
-               {currentUser && <EventTable
-                  user={currentUser}/>}
-            </div>
-         </div>
+               <EventTable
+                  user={currentUser}/>
+            </div>}
       </Layout>
    )
 }

@@ -38,7 +38,6 @@ const Header = () => {
            if (user) {
              // User logged in
              setCurrentUser(user);
-             console.log(user);
            } else {
              setCurrentUser(null)
            }
