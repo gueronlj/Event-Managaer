@@ -5,18 +5,21 @@ import useSWR from 'swr';
 const EventTable = ({user}) => {
 
    const URL = '/api/events/eventsByUser';
-   const USER_ID = useRef(1);
 
    const fetchData = async () => {
       try {
          const response = await axios.post(`${URL}`, {
-            userId: USER_ID.current
+            userId: user.id
          });
          return response.data;
-      } catch (err) { console.log(err) } 
+      } catch (err) { console.log(err) }
    }
 
    const { data, error, isLoading } = useSWR( `${URL}`, fetchData );
+
+   useEffect(() => {
+      console.log( user.id );
+   },[])
 
    return (
       <>
@@ -32,7 +35,7 @@ const EventTable = ({user}) => {
 
                         <h4>Who&apos;s going</h4>
                         <ul>
-                           {event.User.map((user) => {
+                           {event.attendies.map((user) => {
                               return(
                                  <li key={user.id}>{user.email}</li>
                               )

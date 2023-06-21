@@ -4,11 +4,11 @@ const prisma = new PrismaClient()
 export default async function handler(req, res) {
    const data = await prisma.event.findMany({
       include:{
-         attendies:{
+         User:{
             include:{
                events: true
             }
-         }    
+         }
       }
    })
    res.status(200).json(data);

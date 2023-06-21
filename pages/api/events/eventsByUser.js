@@ -5,7 +5,7 @@ export default async function handler(req, res) {
    const data = await prisma.event.findMany({
       where: { organizerId:req.body.userId},
       include:{
-         User:true
+         attendies:true
       }
    })
    res.status(200).json(data);
