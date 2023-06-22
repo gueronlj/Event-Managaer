@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import styles from './styles.module.css';
 import useSWR from 'swr';
-const EventTable = ({user}) => {
+const Attending = ( { user } ) => {
 
    const URL = '/api/events/eventsByUser';
 
@@ -17,12 +17,9 @@ const EventTable = ({user}) => {
 
    const { data, error, isLoading } = useSWR( `${URL}`, fetchData );
 
-   useEffect(() => {
-      console.log( user.id );
-   },[])
-
    return (
       <>
+         <h2>I am attending</h2>
          {isLoading && <p>Loading...</p>}
          {error && <h2>{error?.code}</h2>}
          {data &&
@@ -50,4 +47,4 @@ const EventTable = ({user}) => {
    )
 }
 
-export default EventTable;
+export default Attending;

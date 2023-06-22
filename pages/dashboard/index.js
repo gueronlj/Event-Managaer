@@ -2,7 +2,8 @@ import Layout from "@/components/layout";
 import styles from './dashboard.module.css'
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import EventTable from "@/components/EventTable/EventTable";
+import Organizing from "@/components/Events/Organizing.js";
+import Attending from '@/components/Events/Attending.js';
 import axios from 'axios';
 
 const Dashboard = () => {
@@ -34,9 +35,12 @@ const Dashboard = () => {
       <Layout>
          {currentUser &&
             <div className = {styles.dashboard}>
-               <h1>My Event </h1>
+               <h1>Events</h1>
 
-               <EventTable
+               <Organizing
+                  user={currentUser}/>
+
+               <Attending
                   user={currentUser}/>
             </div>}
       </Layout>
