@@ -22,3 +22,9 @@
    padding-left: 0px;
    list-style-type: none;
 }
+
+.toolbar{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+}

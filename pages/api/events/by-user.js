@@ -3,13 +3,10 @@ const prisma = new PrismaClient()
 
 export default async function handler(req, res) {
    const data = await prisma.event.findMany({
-      include:{
-         User:{
-            include:{
-               events: true
-            }
-         }
-      }
+      // where: { organizerId:req.body.userId},
+      // include:{
+      //    User:true
+      // }
    })
    res.status(200).json(data);
  }

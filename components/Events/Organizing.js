@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import styles from './styles.module.css';
 import useSWR from 'swr';
-const Organizing = ({user}) => {
+import EventCard from "../EventCard/EventCard";
 
-   const URL = '/api/events/eventsByUser';
+const Organizing = ( { user } ) => {
+
+   const URL = '/api/events/by-organizer';
 
    const fetchData = async () => {
       try {
@@ -26,19 +28,13 @@ const Organizing = ({user}) => {
             <div>
                {data.map((event) => {
                   return(
-                     <div className={styles.card} key={event.id}>
-                        <h2>{event.title}</h2>
-                        <p>{event.description}</p>
-
-                        <h4>Who&apos;s going</h4>
-                        <ul>
-                           {event.attendies.map((user) => {
-                              return(
-                                 <li key={user.id}>{user.email}</li>
-                              )
-                           })}
-                        </ul>
-                     </div>
+                     <EventCard
+                        key={event.id}
+                        title={event.title}
+                        description={event.description}
+                        start={event.start}
+                        end={event.end}
+                        attendies={event.User}/>
                   )
                })}
             </div>

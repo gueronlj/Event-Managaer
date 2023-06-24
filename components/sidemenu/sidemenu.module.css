@@ -3,7 +3,6 @@
    padding-top: 20px;
    padding-right: 20px;
    font-size: 14px;
-   height: 100vh;
 }
 
 .SideMenu ul {
@@ -14,5 +13,4 @@
 
 .SideMenu li {
    margin-bottom: 1em;
-
 }

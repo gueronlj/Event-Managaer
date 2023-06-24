@@ -7,7 +7,7 @@ export default async function handler(req, res) {
       const data = await prisma.user.findFirst(
          {
             where: { email: req.body.email },
-            include: { events: true }
+            include: { Event: true }
          }
       )
       res.json(data)

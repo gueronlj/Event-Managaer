@@ -8,6 +8,9 @@ import axios from 'axios';
 
 const Dashboard = () => {
    const [currentUser, setCurrentUser] = useState(null);
+   const [organizing, setOrganizing] = useState(false);
+   const [attending, setAttending] = useState(true);
+   const [newEventForm, setNewEventForm] = useState(false);
 
    const getUserInfo = async( email ) => {
       const URL = '/api/users/profile'
@@ -35,13 +38,22 @@ const Dashboard = () => {
       <Layout>
          {currentUser &&
             <div className = {styles.dashboard}>
-               <h1>Events</h1>
-
-               <Organizing
-                  user={currentUser}/>
-
-               <Attending
-                  user={currentUser}/>
+               <div className= {styles.window}>
+                  <div className={styles.toolbar}>
+                     <a onClick={() => organizing? setOrganizing(false):setOrganizing(true)}>Organizing</a>
+                     <a onClick={() => attending? setAttending(false):setAttending(true)}>Attending</a>
+                     <button onClick={() => newEventForm? setNewEventForm(false):setNewEventForm(true)}>New</button>
+                  </div>
+                  {organizing &&
+                     <Organizing
+                        user={currentUser}/>
+                  }
+                  {attending &&
+                     <Attending
+                     user={currentUser}/>
+                  }
+                 
+               </div>              
             </div>}
       </Layout>
    )
