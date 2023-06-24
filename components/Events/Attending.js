@@ -4,8 +4,7 @@ import EventCard from '../EventCard/EventCard';
 
 const Attending = ( { user } ) => {
 
-   return (<>
-      <h2>I am attending</h2>        
+   return (
       <div>
          {user.Event.map((event) => {
             return(
@@ -18,7 +17,7 @@ const Attending = ( { user } ) => {
             )
          })}
       </div>
-   </>)
+   )
 }
 
 export default Attending;

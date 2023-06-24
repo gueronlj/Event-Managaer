@@ -1,15 +1,13 @@
 import Layout from "@/components/layout";
-import styles from './dashboard.module.css'
+import styles from '@/pages/dashboard/dashboard.module.css';
 import { useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Organizing from "@/components/Events/Organizing.js";
-import Attending from '@/components/Events/Attending.js';
 import axios from 'axios';
+import Link from "next/link";
 
 const Dashboard = () => {
    const [currentUser, setCurrentUser] = useState(null);
-   const [organizing, setOrganizing] = useState(false);
-   const [attending, setAttending] = useState(true);
    const [newEventForm, setNewEventForm] = useState(false);
 
    const getUserInfo = async( email ) => {
@@ -38,17 +36,16 @@ const Dashboard = () => {
       <Layout>
          {currentUser &&
             <div className = {styles.dashboard}>
-               <div className= {styles.window}>                 
-                  <a onClick={() => organizing? setOrganizing(false):setOrganizing(true)}>Organizing {organizing? `--` : `+`}</a>
-                  {organizing &&
-                     <Organizing
-                        user={currentUser}/>
-                  }
-                  <a onClick={() => attending? setAttending(false):setAttending(true)}>Attending {attending? `--` : `+`}</a>
-                  {attending &&
-                     <Attending
-                     user={currentUser}/>
-                  }               
+               <div className= {styles.window}>
+                  <div className={styles.toolbar}>               
+                     <h2>Organizing</h2>
+                     <Link href={`/${encodeURIComponent(currentUser.email)}/attending`}>
+                        I am Attending
+                     </Link>
+                     <button onClick={() => newEventForm? setNewEventForm(false):setNewEventForm(true)}>New</button>
+                  </div>
+                  <Organizing
+                     user={currentUser}/>               
                </div>              
             </div>}
       </Layout>

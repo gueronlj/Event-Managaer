@@ -19,28 +19,25 @@ const Organizing = ( { user } ) => {
 
    const { data, error, isLoading } = useSWR( `${URL}`, fetchData );
 
-   return (
-      <>
-         <h2>I am organzing</h2>
-         {isLoading && <p>Loading...</p>}
-         {error && <h2>{error?.code}</h2>}
-         {data &&
-            <div>
-               {data.map((event) => {
-                  return(
-                     <EventCard
-                        key={event.id}
-                        title={event.title}
-                        description={event.description}
-                        start={event.start}
-                        end={event.end}
-                        attendies={event.User}/>
-                  )
-               })}
-            </div>
-         }
-      </>
-   )
+   return (<>
+      {isLoading && <p>Loading...</p>}
+      {error && <h2>{error?.code}</h2>}
+      {data &&
+         <div>
+            {data.map((event) => {
+               return(
+                  <EventCard
+                     key={event.id}
+                     title={event.title}
+                     description={event.description}
+                     start={event.start}
+                     end={event.end}
+                     attendies={event.User}/>
+               )
+            })}
+         </div>
+      }
+   </>)
 }
 
 export default Organizing;

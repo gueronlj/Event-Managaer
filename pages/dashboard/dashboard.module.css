@@ -27,4 +27,14 @@
    display: flex;
    flex-direction: row;
    justify-content: space-between;
+   align-items: baseline;
+}
+
+.window{
+   display: flex;
+   flex-direction: column;
+}
+
+.window > * {
+   margin: 1em;
 }
