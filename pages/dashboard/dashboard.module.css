@@ -23,11 +23,31 @@
    list-style-type: none;
 }
 
+.dashboard h2{
+   margin: 0px;
+}
+
 .toolbar{
    display: flex;
    flex-direction: row;
-   justify-content: space-between;
+   justify-content: flex-start;
    align-items: baseline;
+   margin: 0px;
+   padding: 10px;
+   border: 1px solid black;
+}
+
+.toolbar > * {
+   margin-right: 20px;
+}
+
+.toolbar h2{
+   margin-right: 20px;
+}
+
+.toolbar button {
+   margin-left: auto;
+   margin-right: 0px;
 }
 
 .window{
@@ -35,6 +55,3 @@
    flex-direction: column;
 }
 
-.window > * {
-   margin: 1em;
-}

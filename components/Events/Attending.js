@@ -13,7 +13,8 @@ const Attending = ( { user } ) => {
                   title={event.title}
                   description={event.description}
                   start={event.start}
-                  end={event.end}/>
+                  end={event.end}
+                  attendies={event.User}/>
             )
          })}
       </div>
