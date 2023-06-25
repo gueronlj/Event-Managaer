@@ -11,15 +11,18 @@ const Dashboard = () => {
    const [organizing, setOrganizing] = useState(false);
    const [attending, setAttending] = useState(true);
    const [newEventForm, setNewEventForm] = useState(false);
+   const [loading, setLoading] = useState(false);
 
    const getUserInfo = async( email ) => {
       const URL = '/api/users/profile'
       try {
+         setLoading(true);
          const response = await axios.post(`${URL}`, {
             email: email
          })
          console.log(response.data.id);
          setCurrentUser(response.data);
+         setLoading(false)
       } catch (err) { console.log(err) }
    }
 
