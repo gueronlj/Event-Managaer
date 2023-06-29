@@ -1,7 +1,6 @@
 .card {
-   display: flex;
-   flex-direction: column;
-   border: 1px solid black;
+   margin: 1em;
+   width: 500px;
 }
 
 .content{
