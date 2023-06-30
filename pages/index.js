@@ -19,7 +19,7 @@ const MyApp = ({Component, pagePROPS}) => {
 
    useEffect(() => {
       //Attatch Firebase authentication Observer
-      const auth = getAuth()
+      const auth = getAuth(app)
       const user = auth.currentUser
          if (user) {
             router.push('/dashboard')  

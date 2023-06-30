@@ -1,6 +1,8 @@
 .card {
    margin: 1em;
-   width: 500px;
+   margin-left: 0px;
+   margin-right: 0px;
+   width: 600px;
 }
 
 .content{
