@@ -1,0 +1,17 @@
+.header {
+   width: 100;
+}
+
+.header button {
+   margin-left: 10px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+.logo{
+   margin-right: auto;
+}
+
+.header h4{
+   margin: 0;
+}

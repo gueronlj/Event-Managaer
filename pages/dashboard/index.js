@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import styles from './dashboard.module.css'
 import { useEffect, useState } from "react";
+import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Organizing from "@/components/Events/Organizing.js";
 import Attending from '@/components/Events/Attending.js';
@@ -62,8 +63,19 @@ const Dashboard = () => {
     }
 
    useEffect(() => {
+
+      const firebaseConfig = {
+      apiKey: process.env.NEXT_PUBLIC_APIKEY,
+      authDomain: process.env.NEXT_PUBLIC_AUTHDOMAIN,
+      projectId: process.env.NEXT_PUBLIC_PROJECTID,
+      storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
+      messagingSenderId: process.env.NEXT_PUBLIC_MESSENGERID,
+      appId: process.env.NEXT_PUBLIC_APPID,
+      measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID
+      };
+      const app = initializeApp(firebaseConfig);
       //Attatch Firebase authentication Observer
-      const auth = getAuth()
+      const auth = getAuth(app)
       onAuthStateChanged(auth, (user) => {
          if (user) {
             getUserInfo(user.email)
