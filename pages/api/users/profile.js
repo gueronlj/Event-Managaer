@@ -8,9 +8,9 @@ export default async function handler(req, res) {
          {
             where: { email: req.body.email },
             include: { 
-               Event: {
+               events: {
                   include: {
-                     User: true
+                     attendies: true,
                   }
                }
             }

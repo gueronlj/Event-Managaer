@@ -6,7 +6,7 @@ export default async function handler(req, res) {
       include:{
          User:{
             include:{
-               Event: true
+               events: true
             }
          }
       }

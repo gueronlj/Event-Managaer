@@ -6,7 +6,7 @@ const Attending = ( { user } ) => {
 
    return (
       <div>
-         {user.Event.map((event) => {
+         {user.Event?.map((event) => {
             return(
                <EventCard
                   key={event.id}

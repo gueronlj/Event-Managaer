@@ -98,7 +98,7 @@ const EventCard = ( { title, description, start, end, attendies }) => {
             <Collapse in={expanded} timeout="auto" unmountOnExit>
                <CardContent>
                   <ul>
-                     {attendies.map((user) => {
+                     {attendies?.map((user) => {
                         return (
                            <li key={user.id}>{user.email}</li>
                         )

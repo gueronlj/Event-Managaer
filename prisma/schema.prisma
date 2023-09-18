@@ -15,7 +15,7 @@ model User {
   email String  @unique
   name  String?
   phone String?
-  Event Event[]
+  Event Event[] @relation("EventToUser")
 }
 
 model Event {
@@ -24,8 +24,8 @@ model Event {
   title       String   @db.VarChar(255)
   description String?  @db.VarChar(255)
   organizerId Int
-  max_tickets Int
   start       DateTime
   end         DateTime
-  User        User[]
+  max_tickets Int
+  User        User[]   @relation("EventToUser")
 }
