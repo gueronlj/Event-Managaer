@@ -12,7 +12,8 @@ const firebaseConfig = {
      messagingSenderId: process.env.NEXT_PUBLIC_MESSENGERID,
      appId: process.env.NEXT_PUBLIC_APPID,
      measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID
-   };
+};
+
 const app = initializeApp(firebaseConfig);
 
 const LogoutBtn = () => {

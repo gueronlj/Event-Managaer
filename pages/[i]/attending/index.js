@@ -30,7 +30,8 @@ const Dashboard = () => {
       onAuthStateChanged(auth, (user) => {
          if (user) {
             getUserInfo(user.email)
-            console.log(currentUser);
+            console.log(currentUser)
+            setCurrentUser(user);
          } else {  setCurrentUser(null) }
       })
    },[])

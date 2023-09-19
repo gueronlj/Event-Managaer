@@ -79,8 +79,12 @@ const Dashboard = () => {
       onAuthStateChanged(auth, (user) => {
          if (user) {
             getUserInfo(user.email)
+            setCurrentUser(user)
             console.log(currentUser);
-         } else {  setCurrentUser(null) }
+         } else {  
+            setCurrentUser(null)
+            console.log("logged out!"); 
+         }
       })
    },[])
 

@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import InputLabel from "@mui/material/InputLabel";
 import styles from './login.module.css'
 import CheckFormControl from "@/components/helpers/CheckFormControl";
+import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Link from 'next/link'
 import translateError from "@/components/helpers/TranslateError";
@@ -18,9 +19,21 @@ const Login = () => {
    const [credentials, setCredentials] = useState({email:'', password:''})
    const [credentialsError, setCredentialsError] = useState('')
    const [loading, setLoading] = useState (false)
+   const [currentUser, setCurrentUser] = useState(null)
+
+   const firebaseConfig = {
+      apiKey: process.env.NEXT_PUBLIC_APIKEY,
+      authDomain: process.env.NEXT_PUBLIC_AUTHDOMAIN,
+      projectId: process.env.NEXT_PUBLIC_PROJECTID,
+      storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
+      messagingSenderId: process.env.NEXT_PUBLIC_MESSENGERID,
+      appId: process.env.NEXT_PUBLIC_APPID,
+      measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID
+      };
+
+   const app = initializeApp(firebaseConfig);
 
    const login = async () => {
-      console.log(credentials);
       checkCredentials(credentials.email, credentials.password)
    }
 
@@ -30,12 +43,13 @@ const Login = () => {
 
    const checkCredentials = async (email, password) => {
       setLoading(true)
-      const auth = getAuth()
+      const auth = getAuth(app)
       signInWithEmailAndPassword(auth, email, password)
          .then((userCredential) => {
             //success
             console.log('logged in!');
             setCredentialsError('');
+            setCurrentUser(auth.currentUser)
             Router.push('/')
          })
          .catch((error) => {

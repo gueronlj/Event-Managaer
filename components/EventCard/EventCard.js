@@ -106,6 +106,7 @@ const EventCard = ( { title, description, start, end, attendies }) => {
                   </ul>
                </CardContent>
             </Collapse>
+            <ActionBar/>
          </Card>
       </div>     
    )

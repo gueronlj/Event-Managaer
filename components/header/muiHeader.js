@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './header.module.css'
+import { initializeApp } from 'firebase/app';
+import { getAuth, signOut, onAuthStateChanged } from "firebase/auth";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,12 +15,26 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_APIKEY,
+  authDomain: process.env.NEXT_PUBLIC_AUTHDOMAIN,
+  projectId: process.env.NEXT_PUBLIC_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_MESSENGERID,
+  appId: process.env.NEXT_PUBLIC_APPID,
+  measurementId: process.env.NEXT_PUBLIC_MEASUREMENTID
+};
+
+const app = initializeApp(firebaseConfig);
+
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null)
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const auth = getAuth(app);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,6 +52,10 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  const handleLogout = () => {
+    getAuth(app).signOut();
+  }
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -55,7 +75,7 @@ export default function PrimarySearchAppBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -111,6 +131,27 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+  const getUserInfo = async () => {
+     try{
+        onAuthStateChanged( getAuth(app), (user) => {
+          if (user) {
+            // User logged in
+            setCurrentUser(user);
+            console.log(user.email);
+          } else {
+            setCurrentUser(null)
+          }
+          console.log(`state: ` + currentUser?.email);
+        })
+     } catch (error) {
+        console.log(error);
+     }
+  }
+
+  useEffect(() => {
+    getUserInfo()
+  },[]);
+
   return (
       <Box>
       <AppBar position="static">
@@ -121,7 +162,7 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            EM
+            {currentUser?.email || ''}
           </Typography>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>

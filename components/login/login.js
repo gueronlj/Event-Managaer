@@ -11,7 +11,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import translateError from '../helpers/TranslateError.js'
 import Link from 'next/link'
 
-const Login = () => {
+const Login = ({setCurrentUser}) => {
    
    const { register, handleSubmit, formState: { errors }, watch } = useForm( {mode: "onChange"})
    const [credentials, setCredentials] = useState({email:'', password:''})
@@ -35,6 +35,7 @@ const Login = () => {
             //success
             console.log('logged in!');
             setCredentialsError('')
+            setCurrentUser(auth.currentUser)
          })
          .catch((error) => {
             console.log(error.message);
